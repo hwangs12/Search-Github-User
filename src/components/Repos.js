@@ -3,7 +3,22 @@ import styled from "styled-components";
 import { GithubContext } from "../context/context";
 import { ExampleChart, Pie3D, Column3D, Bar3D, Doughnut2D } from "./Charts";
 const Repos = () => {
-	return <h4>repos component</h4>;
+	return (
+		<Wrapper className="section-center">
+			<div>
+				<ExampleChart />
+			</div>
+			<div>
+				<Pie3D />
+			</div>
+			<div>
+				<Column3D />
+			</div>
+			<div>
+				<Bar3D />
+			</div>
+		</Wrapper>
+	);
 };
 
 const Wrapper = styled.div`

@@ -10,6 +10,9 @@ const GithubContext = React.createContext();
 
 const GithubProvider = ({ children }) => {
 	const [search, setSearch] = useState("");
+	const [githubUser, setGithubUser] = useState(mockUser);
+	const [repos, setRepos] = useState(mockRepos);
+	const [followers, setFollowers] = useState(mockFollowers);
 
 	const handleSearch = (e) => {
 		setSearch(e.target.value);
@@ -20,7 +23,16 @@ const GithubProvider = ({ children }) => {
 	};
 
 	return (
-		<GithubContext.Provider value={{ search, handleSearch, handleSubmit }}>
+		<GithubContext.Provider
+			value={{
+				search,
+				handleSearch,
+				handleSubmit,
+				githubUser,
+				repos,
+				followers,
+			}}
+		>
 			{children}
 		</GithubContext.Provider>
 	);

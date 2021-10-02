@@ -3,29 +3,42 @@ import { GithubContext } from "../context/context";
 import styled from "styled-components";
 import { MdBusiness, MdLocationOn, MdLink } from "react-icons/md";
 const Card = () => {
+	const { githubUser } = React.useContext(GithubContext);
+	const {
+		avatar_url,
+		name,
+		twitter_username,
+		html_url,
+		bio,
+		company,
+		location,
+		blog,
+	} = githubUser;
 	return (
 		<Wrapper>
 			<header>
-				<img src="" alt="" />
+				<img src={avatar_url} alt={name} />
 				<div>
-					<h4>hwangs12</h4>
-					<p>@jun_hwang</p>
+					<h4>{name}</h4>
+					<p>@{twitter_username || `john doe`}</p>
 				</div>
-				<a href="">follower</a>
+				<a href={html_url} target="_blank">
+					follow
+				</a>
 			</header>
-			<p className="bio">creator of matrix</p>
+			<p className="bio">{bio}</p>
 			<div className="links">
 				<p>
 					<MdBusiness />
-					mamma mia
+					{company}
 				</p>
 				<p>
 					<MdLocationOn />
-					mamma mia
+					{location}
 				</p>
 				<p>
 					<MdLink />
-					mamma mia
+					{blog}
 				</p>
 			</div>
 		</Wrapper>

@@ -5,6 +5,14 @@ import { GoRepo, GoGist } from "react-icons/go";
 import { FiUsers, FiUserPlus } from "react-icons/fi";
 
 const UserInfo = () => {
+	const { githubUser } = React.useContext(GithubContext);
+	const {
+		public_repos: repos,
+		followers,
+		following,
+		public_gists: gists,
+	} = githubUser;
+
 	return (
 		<section className="section">
 			<Wrapper className="section-center">
@@ -13,7 +21,7 @@ const UserInfo = () => {
 						<GoRepo className="icon" />
 					</span>
 					<div>
-						<h3>100</h3>
+						<h3>{repos}</h3>
 						<p>repos</p>
 					</div>
 				</article>
@@ -22,7 +30,7 @@ const UserInfo = () => {
 						<FiUsers className="icon" />
 					</span>
 					<div>
-						<h3>100</h3>
+						<h3>{followers}</h3>
 						<p>followers</p>
 					</div>
 				</article>
@@ -31,7 +39,7 @@ const UserInfo = () => {
 						<FiUserPlus className="icon" />
 					</span>
 					<div>
-						<h3>100</h3>
+						<h3>{following}</h3>
 						<p>following</p>
 					</div>
 				</article>
@@ -40,7 +48,7 @@ const UserInfo = () => {
 						<GoGist className="icon" />
 					</span>
 					<div>
-						<h3>100</h3>
+						<h3>{gists}</h3>
 						<p>gists</p>
 					</div>
 				</article>
