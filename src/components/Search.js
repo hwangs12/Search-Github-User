@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { GithubContext } from "../context/context";
 const Search = () => {
-	const { search, handleSearch, handleSubmit } =
+	const { search, handleSearch, handleSubmit, requests } =
 		React.useContext(GithubContext);
 
 	return (
@@ -21,7 +21,7 @@ const Search = () => {
 						<button type="submit">search</button>
 					</div>
 				</form>
-				<h3>{`requests: 1 / 60`}</h3>
+				<h3>{`requests: ${requests} / 60`}</h3>
 			</Wrapper>
 		</section>
 	);

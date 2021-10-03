@@ -37,13 +37,35 @@ const Repos = () => {
 			return { label, value: stars };
 		});
 
+	// stars, forks per repo
+
+	let { stars, forks } = repos.reduce(
+		(total, item) => {
+			const { stargazers_count, name, forks } = item;
+			total.stars[name] = { label: name, value: stargazers_count };
+			total.forks[name] = { label: name, value: forks };
+			return total;
+		},
+		{
+			stars: {},
+			forks: {},
+		}
+	);
+
+	const starredRepos = Object.values(stars)
+		.sort((a, b) => b.value - a.value)
+		.slice(0, 5);
+	const forkedRepos = Object.values(forks)
+		.sort((a, b) => b.value - a.value)
+		.slice(0, 5);
+
 	return (
 		<section className="section">
 			<Wrapper className="section-center">
 				<Pie3D data={committedMost} />
-				<Column3D data={committedMost} />
+				<Column3D data={starredRepos} />
 				<Doughnut2D data={mostPopular} />
-				<Bar3D data={committedMost} />
+				<Bar3D data={forkedRepos} />
 			</Wrapper>
 		</section>
 	);

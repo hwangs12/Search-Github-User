@@ -14,6 +14,25 @@ const GithubProvider = ({ children }) => {
 	const [repos, setRepos] = useState(mockRepos);
 	const [followers, setFollowers] = useState(mockFollowers);
 
+	//set requests and loading state
+	const [requests, setRequests] = useState(60);
+	const [loading, setLoading] = useState(false);
+
+	//useeffect to fetch rate limit and consider destructuring
+	useEffect(() => {
+		axios(`${rootUrl}/rate_limit`)
+			.then(({ data }) => {
+				const {
+					rate: { remaining },
+				} = data;
+				setRequests(remaining);
+				if (remaining === 0) {
+					// throw an error
+				}
+			})
+			.catch((err) => console.log(err));
+	}, []);
+
 	const handleSearch = (e) => {
 		setSearch(e.target.value);
 	};
@@ -31,6 +50,7 @@ const GithubProvider = ({ children }) => {
 				githubUser,
 				repos,
 				followers,
+				requests,
 			}}
 		>
 			{children}
