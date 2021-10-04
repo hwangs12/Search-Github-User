@@ -57,17 +57,18 @@ const GithubProvider = ({ children }) => {
 			const { repos_url, followers_url } = userData.data;
 			//https://api.github.com/users/wesbos/followers
 			//https://api.github.com/users/wesbos/repos
-			axios(`${repos_url}?per_page=100`)
-				.then((response) => {
-					if (response) {
-						setRepos(response.data);
+			await Promise.allSettled([
+				axios(`${repos_url}?per_page=100`),
+				axios(`${followers_url}?per_page=100`),
+			])
+				.then((results) => {
+					const [repos, followers] = results;
+					const status = "fulfilled";
+					if (repos.status === status) {
+						setRepos(repos.value.data);
 					}
-				})
-				.catch((err) => console.log(err));
-			axios(`${followers_url}?per_page=100`)
-				.then((response) => {
-					if (response) {
-						setFollowers(response.data);
+					if (followers.status === status) {
+						setFollowers(followers.value.data);
 					}
 				})
 				.catch((err) => console.log(err));
